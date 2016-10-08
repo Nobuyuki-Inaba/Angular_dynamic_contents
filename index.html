@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="app">
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-controller="TopController as ctrl">  
+        <div ng-repeat="question in ctrl.questions track by $index">    
+            <div ng-if="'0' == question.type">
+                <select ng-model="ctrl.inputs[$index]">
+                    <option ng-repeat="v in question.values track by v.id" ng-value="v.id" >
+                        {{v.label}}
+                    </option>
+                </select>
+            </div>        
+            <div ng-if="'2' == question.type">
+                <input type="text" ng-model="ctrl.inputs[$index]">
+            </div>
+        </div>
+        <div ng-repeat="input in ctrl.inputs track by $index">
+            {{$index}}{{input}}
+        </div>
+        <button ng-click="ctrl.onUpdate()">submit</button>
+    </body>
+</html>
